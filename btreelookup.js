@@ -1,7 +1,6 @@
 function submitForm() {
     var streetNumber = $('#street-number').val();
     var streetName = $('#street-name').val();
-    console.log('Submitting form with street number:', streetNumber, 'and street name:', streetName);
     $.ajax({
         url: 'https://cors-anywhere.herokuapp.com/https://braintree.patriotproperties.com/search-middle-ns.asp',
         method: 'POST',
@@ -11,12 +10,11 @@ function submitForm() {
         },
         dataType: 'html'
     }).done(function(response) {
-        console.log('Received response:', response);
+        console.log('Response:', response); // add this line to log the response
         var propertyValue = $(response).find('td:contains("$")').text().trim();
-        console.log('Found property value:', propertyValue);
         $('#result').text('The property value is ' + propertyValue);
     }).fail(function(jqXHR, textStatus, errorThrown) {
-        console.error('Error:', errorThrown);
+        console.log('Error:', errorThrown); // add this line to log the error
         $('#result').text('Error: ' + errorThrown);
     });
 }

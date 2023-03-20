@@ -1,11 +1,11 @@
 $(document).ready(function() {
   // listen for the form submission event
-  $('#property-value-form').submit(function(event) {
+  $('#property-form').submit(function(event) {
     // prevent the default form submission behavior
     event.preventDefault();
     // get the user input values from the form
-    var streetNumber = $('#street-number-input').val();
-    var streetName = $('#street-name-input').val();
+    var streetNumber = $('#street-number').val();
+    var streetName = $('#street-name').val();
     // send an AJAX POST request to the server
     $.ajax({
       url: 'https://cors-anywhere.herokuapp.com/https://braintree.patriotproperties.com/search-middle-ns.asp',

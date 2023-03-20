@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Braintree Property Lookup</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="btreelookup.js"></script>
+</head>
+<body>
+    <h1>Braintree Property Lookup</h1>
+    <form>
+        <label for="street-number">Street Number:</label>
+        <input type="text" id="street-number" name="street-number"><br>
+
+        <label for="street-name">Street Name:</label>
+        <input type="text" id="street-name" name="street-name"><br>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <div id="result"></div>
+</body>
+</html>

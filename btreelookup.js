@@ -1,4 +1,5 @@
-function submitForm() {
+function submitForm(event) {
+    event.preventDefault();
     var streetNumber = $('#street-number').val();
     var streetName = $('#street-name').val();
     $.ajax({
@@ -16,3 +17,7 @@ function submitForm() {
         $('#result').text('Error: ' + errorThrown);
     });
 }
+
+$(function() {
+    $('#property-form').on('submit', submitForm);
+});

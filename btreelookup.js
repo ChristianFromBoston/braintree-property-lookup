@@ -1,22 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>Property Value Search</title>
-	<!-- include jQuery library from a CDN -->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<!-- include your script.js file -->
-	<script src="script.js"></script>
-</head>
-<body>
-	<h1>Property Value Search</h1>
-	<form id="property-value-form">
-		<label for="street-number-input">Street Number:</label>
-		<input type="text" id="street-number-input" name="street-number">
-		<label for="street-name-input">Street Name:</label>
-		<input type="text" id="street-name-input" name="street-name">
-		<button type="submit" id="submit-button">Search</button>
-	</form>
-	<div id="result"></div>
-</body>
-</html>
+$(document).ready(function() {
+  // listen for the form submission event
+  $('#property-value-form').submit(function(event) {
+    // prevent the default form submission behavior
+    event.preventDefault();
+    // get the user input values from the form
+    var streetNumber = $('#street-number-input').val();
+    var streetName = $('#street-name-input').val();
+    // send an AJAX POST request to the server
+    $.ajax({
+      url: 'https://cors-anywhere.herokuapp.com/https://braintree.patriotproperties.com/search-middle-ns.asp',
+      method: 'POST',
+      data: {
+        'SearchStreetNumber': streetNumber,
+        'SearchStreetName': streetName
+      },
+      dataType: 'html'
+    }).done(function(response) {
+      // parse the HTML response and extract the property value
+      var propertyValue = $(response).find('td:contains("$")').text().trim();
+      // display the property value to the user
+      $('#result').text('The property value is ' + propertyValue);
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+      // display an error message if the request fails
+      $('#result').text('Error: ' + errorThrown);
+    });
+  });
+});
